@@ -1,27 +1,29 @@
 {
-  "name": "helping_hands",
-  "version": "0.1.0",
-  "description": "Helping Hand is a web application that facilitates the organization and participation of events for public welfare",
-  "main": "app.js",
-  "type": "module",
-  "scripts": {
-    "start": "node app.js",
-    "seed": "node seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jdobariya/Helping-Hand.git"
-  },
-  "author": "Jaydeep, Jay, Nikhil, Weijin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jdobariya/Helping-Hand/issues"
-  },
-  "homepage": "https://github.com/jdobariya/Helping-Hand#readme",
-  "dependencies": {
-    "express": "^4.18.2",
-    "handlebars": "^4.7.7",
-    "mongodb": "^5.1.0"
-  }
+    "name": "helping_hands",
+    "version": "0.1.0",
+    "description": "Helping Hand is a web application that facilitates the organization and participation of events for public welfare",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "node app.js",
+        "seed": "node seed.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jdobariya/Helping-Hand.git"
+    },
+    "author": "Nikhil Varma, Weijin, Jay, Jaydeep",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jdobariya/Helping-Hand/issues"
+    },
+    "homepage": "https://github.com/jdobariya/Helping-Hand#readme",
+    "dependencies": {
+        "bcrypt": "5.1.0",
+        "express": "^4.18.2",
+        "express-handlebars": "^7.0.7",
+        "handlebars": "^4.7.7",
+        "mongodb": "^5.1.0"
+    }
 }

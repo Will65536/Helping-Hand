@@ -6,17 +6,61 @@ const exportedMethods = {
   async addEvent (
     event_name,
     description,
-    releaseDate,
-    releaseTime,
-    registerExpireDate,
-    registerEXpireTime,
-    hostDate,
-    hostTime,
-    location,
-    hostInfo,
     tags,
+    application_deadline,
+    host_time,
+    location,
+    host_info,
   ){
+    let {
+      event_name,
+      description,
+      tags,
+      application_deadline,
+      host_time,
+      location,
+      host_info,
+      stories,
+      feedbacks,
+      likes
+    } = validation.checkEventsInputs(
+      event_name,
+      description,
+      tags,
+      application_deadline,
+      host_time,
+      location,
+      host_info,);
 
+    const now = new Date();
+    const nowYear = now.getFullYear();
+    const nowMonth = now.getMonth() + 1;
+    const nowDay = now.getDay();
+    const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const amPm = now.getHours() >= 12 ? 'PM' : 'AM';
+    
+    const release_time = `${nowMonth}/${nowDay}/${nowYear} ${timeString} ${amPm}`;
+
+    const newEvent = {
+      event_name,
+      description,
+      tags,
+      release_time,
+      application_deadline,
+      host_time,
+      location,
+      host_info,
+      stories,
+      feedbacks,
+      likes
+    };
+
+    const eventsCollection = await events();
+    const insertEvent = await eventsCollection.insertOne(newEvent);
+    if (!insertEvent.insertedId) throw "Failed Inserting a event";
+    let newId=insertUser.insertedId.toString();
+    console.log(newId)
+    return await this.getEventById(newId);
   },
 
   async removeEvent(id) {
