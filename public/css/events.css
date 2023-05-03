@@ -1,0 +1,111 @@
+.row {
+  margin: 10px 0px 10px 0px;
+  display: flex;
+}
+
+.col {
+  max-width: 33.33% !important;
+  width: 33.33% !important;
+  padding: 20px 20px 20px 20px;
+}
+
+.card img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  min-height: 350px;
+}
+
+.card .card-title a {
+  text-decoration: none !important;
+}
+.card .card-title a:hover {
+  color: crimson;
+}
+.row-container {
+  margin: 20px 30px 20px 30px;
+}
+
+.fa-heart {
+  color: red;
+}
+
+.empty {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .col {
+    min-width: 100% !important;
+    flex: 1 0 100% !important;
+  }
+}
+
+.input-group {
+  border: 1px solid black;
+}
+
+.input-group span {
+  border-left: 2px solid black;
+}
+.input-group span button:focus {
+  outline: none;
+}
+
+.search input[type="text"] {
+  width: 300px;
+  height: 27px;
+  border: 1px solid black !important;
+  border-radius: 5px;
+  border: none;
+  padding: 15px 15px 15px 15px;
+}
+
+.search {
+  margin: 20px 0px 10px 0px;
+}
+
+.filter {
+  margin: 25px 0px 10px 50px;
+}
+
+.search form {
+  margin: 0;
+}
+.search input {
+  padding-right: 40px !important;
+}
+
+.search form button {
+  background-color: #0074d9;
+  color: #f2f2f2;
+  padding: 7px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px 0px;
+  margin: -35px;
+}
+
+#searchAndFilter {
+  justify-content: center;
+  display: flex;
+}
+
+@media screen and (max-width: 500px) {
+  #searchAndFilter {
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    display: block;
+  }
+
+  .row-container {
+    margin-top: 100px;
+  }
+
+  .search {
+    margin-left: -18px;
+  }
+}

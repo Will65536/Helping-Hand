@@ -1,0 +1,78 @@
+<main id="indi-event">
+  <div class="event-img">
+    <img
+      src="/public/images/{{event.image_url}}"
+      class="card-img-top"
+      alt="..."
+    />
+  </div>
+  <div class="event-container">
+    <div class="host-time">
+      <p>{{event.etime}}</p>
+    </div>
+    <div class="event-title">
+      <h1>{{event.event_name}}</h1>
+    </div>
+    <div class="about-event">
+      <p><span><strong>About:</strong>&nbsp;</span>{{event.description}}</p>
+    </div>
+    <div class="event-registeration">
+      <form action="">
+        <input type="submit" name="register-btn" value="REGISTER NOW" />
+      </form>
+    </div>
+    <div class="event-location">
+      <p>When and Where</p>
+      <div class="time-loc-wrapper">
+        <div class="event-time">
+          <p>Date and Time</p>
+          <p>{{event.host_time}}</p>
+        </div>
+        <div class="event-loc">
+          <p>Location</p>
+          <p>
+            <span>Address:&nbsp;</span>
+            {{event.location.address}}
+          </p>
+          <p>
+            <span>City:&nbsp;</span>
+            {{event.location.city}}
+          </p>
+          <p>
+            <span>State:&nbsp;</span>
+            {{event.location.state}}
+          </p>
+          <p>
+            <span>ZIP:&nbsp;</span>
+            {{event.location.zipcode}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="event-deadline">
+      <p>Registration Deadline</p>
+      <div class="time-loc-wrapper">
+        <div class="event-time">
+          <p>Date and Time</p>
+          <p>{{event.application_deadline}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="event-host">
+      <p class="event-d-title">About the organizer</p>
+      <div class="host-deatil">
+        <p><span>Host:&nbsp;</span>
+          {{event.host_info.host_name}}
+        </p>
+        <p>
+          <span>Contact:&nbsp;</span>
+          <a
+            href="mailto:{{event.host_info.contact}}"
+          >{{event.host_info.contact}}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</main>

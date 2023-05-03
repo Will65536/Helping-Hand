@@ -87,6 +87,13 @@ export function isValidEmail(email) {
   throw "Error: invalid email"
 }
 
+export function isValidName(name){
+  if(name.length < 2) throw "Name cannot be less than 2 characters";
+  if(name.length > 25) throw "Name cannot be more than 25 characters";
+  if(name.trim().length === 0) throw "Name cannot be empty";
+  if(!isNaN(name)) throw "Name cannot be a number";
+}
+
 export function isValidTime(time, timeName) {
   if(typeof time !== 'string') {
     throw `Error: ${timeName} is not a string`;
@@ -98,7 +105,7 @@ export function isValidTime(time, timeName) {
     throw `Error: ${timeName} should not be empty string`;
   }
 
-  const regex = /^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2} (AM|PM)$/;
+  const regex = /^\d{2}\/\d{2}\/\d{4} \d{1,2}:\d{2} (AM|PM)$/;
   if (!regex.test(time)) {
     throw `Error: ${timeName} is not in valid format`;
   }
@@ -115,7 +122,7 @@ export function isValidTime(time, timeName) {
   if(month >= 1 && month <= 12 &&
   day >= 1 && day <= new Date(year, month, 0).getDate() &&
   year >= currentYear && year <= currentYear + 3 &&
-  hour >= 0 && hour <= 12 &&
+  hour >= 0 && hour <= 24 &&
   minute >= 0 && minute <= 59) {
     return time;
   }else {
@@ -123,48 +130,48 @@ export function isValidTime(time, timeName) {
   }
 }
 
-export function isValidLocation(location, locationName) {
+export function isValidLocation(location) {
   const keys = Object.keys(location);
   
   if(keys.length !== 4) {
-    throw `Error: ${locationName} object must have "address", "city", "state" and "zipcode" four keys`;
+    throw `Error: location object must have "address", "city", "state" and "zipcode" four keys`;
   }
 
   const expectedKeys = ["address", "city", "state", "zipcode"];
   for(const key of expectedKeys) {
     if(!keys.includes(key)) {
-      throw `Error: ${locationName} object must have "address", "city", "state" and "zipcode" four keys`;
+      throw `Error: location object must have "address", "city", "state" and "zipcode" four keys`;
     }
   }
 
   for(const key of expectedKeys) {
     location[key] = location[key].trim();
     if(location[key].length === 0) {
-      throw "Error: ${locationName} object has empty string value";
+      throw "Error: location object has empty string value";
     }
   }
 
   return location;
 }
 
-export function isValidHostInfo(hostInfo, hostInfoName) {
+export function isValidHostInfo(hostInfo) {
   const keys = Object.keys(hostInfo);
 
   if(keys.length !== 3) {
-    throw `Error: ${hostInfoName} object must have "hostId", "hostName", "contact" three keys`;
+    throw `Error: hostInfo object must have "host_id", "host_name", "contact" three keys`;
   }
 
-  const expectedKeys = ["hostId", "hostName", "contact"];
+  const expectedKeys = ["host_id", "host_name", "contact"];
   for(const key of expectedKeys) {
     if(!keys.includes(key)) {
-      throw `Error: ${locationName} object must have "hostId", "hostName", "contact" three keys`;
+      throw `Error: hostInfo object must have "host_id", "host_name", "contact" three keys`;
     }
   }
 
-  hostInfo.hostId = hostInfo.hostId.trim();
-  isValidId(hostInfo.hostId);
+  hostInfo.host_id = hostInfo.host_id.trim();
+  isValidId(hostInfo.host_id);
 
-  hostInfo.hostName = isValidString(hostInfo.hostName);
+  hostInfo.host_name = isValidString(hostInfo.host_name);
 
   hostInfo.contact = hostInfo.contact.trim().toLowerCase()
   isValidEmail(hostInfo.contact);
@@ -220,12 +227,6 @@ export function isValidFeedback(feedback) {
   feedback.feedback_comment = isValidString(feedback.feedback_comment);
 
   return feedback;
-}
-
-export function isValidNumber(num, numName) {
-  if(typeof num !== 'number' || Number.isNaN(num)) {
-    throw `Error: ${numName} is not a number`;
-  }
 }
 
 export function checkInputs(
@@ -292,25 +293,24 @@ export function checkInputs(
     past_hosted_events,
     current_hosted_events,
     user_story,
-  user_feedback}
-
+    user_feedback}
+    
 }
 
 export function checkEventsInputs(
   event_name,
   description,
-  tags,
   application_deadline,
   host_time,
   location,
   host_info,
+  volunteers = [],
   stories = [],
   feedbacks = [],
   likes = 0
 ) {
   event_name = isValidString(event_name);
   description = isValidString(description);
-  tags = isValidArray(tags, "tags");
   application_deadline = isValidTime(application_deadline, "application_deadline");
   host_time = isValidTime(host_time, "host_time");
   location = isValidLocation(location, "location");
@@ -328,15 +328,13 @@ export function checkEventsInputs(
     }
   }
 
-  isValidNumber(likes);
-
   return {
     event_name,
     description,
-    tags,
     application_deadline,
     host_time,
     location,
+    volunteers,
     host_info,
     stories,
     feedbacks,

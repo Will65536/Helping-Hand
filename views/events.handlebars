@@ -1,0 +1,53 @@
+<main id="events">
+
+  <div id="searchAndFilter">
+    <div class="search">
+      <form action="#">
+        <input type="text" placeholder="Search" name="search" />
+        <button>
+          <i class="fa fa-search" style="font-size: 18px;">
+          </i>
+        </button>
+      </form>
+
+    </div>
+    <div class="filter">
+      <form>
+        <label for="filter">Filter:</label>
+        <select name="filter" id="filter">
+          <option value="popularity">Popularity</option>
+          <option value="recent" selected>Most Recent</option>
+          <option value="due">Due soon</option>
+        </select>
+      </form>
+    </div>
+
+  </div>
+  <div class="row-container">
+    {{#each allEvents}}
+      <div class="row">
+        {{#each row}}
+          <div class="col">
+            <div class="card">
+              <img
+                src="/public/images/{{image_url}}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title"><a
+                    href="event/{{_id}}"
+                  >{{event_name}}</a></h5>
+                <p class="card-text">{{description}}</p>
+                <p>{{likes}}&nbsp;<i class="fa fa-heart"></i></p>
+                <p><span>Registration Deadline:</span>&nbsp;{{application_deadline}}</p>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="empty">No content</p>
+    {{/each}}
+  </div>
+</main>

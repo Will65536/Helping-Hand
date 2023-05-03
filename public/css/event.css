@@ -1,0 +1,104 @@
+#indi-event {
+  margin-top: 30px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.event-img img {
+  max-height: 40vh;
+  min-height: 40vh;
+}
+
+.host-time p {
+  margin: 0;
+  justify-content: left;
+}
+
+.event-container {
+  margin: 0 10vw;
+  margin-top: 20px;
+}
+
+.event-title {
+  justify-content: left;
+  margin-top: 10px;
+}
+
+.about-event {
+  justify-content: left;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.event-registeration {
+  justify-content: center;
+  display: flex;
+}
+.event-registeration input {
+  background-color: rgb(80, 174, 80);
+  padding: 10px 25px;
+  border: 2px solid greenyellow;
+  border-radius: 25px;
+  font-size: 20px;
+  color: ghostwhite;
+}
+
+.time-loc-wrapper {
+  display: flex;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.event-deadline {
+  margin-top: 20px;
+}
+.event-deadline p:first-child {
+  font-size: 20px;
+  font-weight: 600;
+}
+.event-host {
+  margin-top: 20px;
+}
+.event-d-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.host-deatil {
+  padding: 0px 5rem;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 0;
+}
+
+.event-location p:first-child {
+  font-size: 20px;
+  font-weight: 600;
+}
+.event-loc {
+  padding: 0px 5rem;
+}
+.event-loc p {
+  margin: 0;
+}
+
+.event-loc p:first-child {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.event-time {
+  padding: 0px 5rem;
+}
+.event-time p:first-child {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.event-time p {
+  margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .time-loc-wrapper {
+    display: block;
+  }
+}

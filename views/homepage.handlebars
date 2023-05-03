@@ -1,0 +1,44 @@
+<main>
+  <div id="home">
+    <div id="home-container">
+      <p>Be the change you wish to see in the world.</p>
+      <p> - Mahatma Gandhi</p>
+    </div>
+  </div>
+
+  <section class="homepage-events">
+    <h3>Recent Events</h3>
+    <div class="row-container">
+      <div class="row">
+
+        {{#each allEvents}}
+
+          <div class="card card-{{@index}}">
+            <img
+              src="/public/images/{{image_url}}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title"><a
+                  href="event/{{_id}}"
+                >{{event_name}}</a></h5>
+                <p class="card-text">{{description}}</p>
+                <p>{{likes}}&nbsp;<i class="fa fa-heart"></i></p>
+                <p><span>Registration Deadline:</span>&nbsp;{{application_deadline}}</p>
+            </div>
+          </div>
+
+        {{else}}
+          <p class="empty">No content</p>
+        {{/each}}
+
+      </div>
+      <div id="sliderControls">
+        <button id="pre" class="control-btn" onclick="showPreEvent(event)"></button>
+        <button id="next" class="control-btn" onclick="showNextEvent(event)"></button>
+      </div>
+
+    </div>
+  </section>
+</main>

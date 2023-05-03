@@ -1,0 +1,158 @@
+#home {
+  background-image: url("/public/images/volunteering2.jpeg");
+  min-height: 60vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+#home {
+  text-align: center;
+  font-weight: bolder;
+  position: relative;
+}
+#home-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(3, 2, 56);
+}
+
+#home-container p {
+  font-size: 3rem;
+}
+#home-container p:hover {
+  font-size: 4rem;
+  text-shadow: 1px 1px 0px rgb(244, 235, 235), 2px 2px 0px rgb(245, 238, 238),
+    3px 3px 0px rgb(5, 5, 5), 4px 4px 0px #fff, 5px 5px 0px #fff,
+    6px 6px 0px #fff, 7px 7px 0px rgb(10, 10, 10), 8px 8px 0px rgb(11, 11, 11),
+    9px 9px 0px #fff, 10px 10px 0px #fff, 11px 11px 0px #fff, 12px 12px 0px #fff,
+    13px 13px 0px #fff, 14px 14px 0px #fff, 15px 15px 0px #fff;
+}
+#home-container p:last-child {
+  float: right;
+}
+@media (max-width: 768px) {
+  #home-container {
+    width: 100%;
+    padding: 0 20px 0px 20px;
+  }
+  #home-container p {
+    font-size: 3rem !important;
+  }
+}
+.homepage-events h3 {
+  margin-top: 30px;
+  text-align: center;
+}
+#event-name {
+  padding-top: 5px;
+  padding-left: 10px;
+  font-size: 18pt;
+  font-weight: bolder;
+}
+#city-name {
+  padding-left: 10px;
+  padding-bottom: 25px;
+  color: rgb(64, 118, 13);
+}
+.dropdown-menu {
+  background-color: #f8f9fa;
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.dropdown-item {
+  padding: 0.25rem 1.5rem;
+  color: #212529;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  background-color: #dee2e6;
+}
+
+.dropdown-menu > .active > .dropdown-item {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dropdown-menu > .active > .dropdown-item:hover,
+.dropdown-menu > .active > .dropdown-item:focus {
+  background-color: #0069d9;
+}
+
+.image {
+  display: block;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-out;
+}
+
+.image:hover {
+  transform: scale(1.1);
+}
+
+#ending {
+  color: rgb(214, 31, 31);
+  display: block;
+}
+.about-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.about-column {
+  width: 25%;
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-column {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-column {
+    width: 100%;
+  }
+}
+
+#sliderControls {
+  justify-content: center;
+  display: flex;
+}
+
+.control-btn {
+  margin: 5px 10px 5px 10px;
+  font-size: 2rem;
+  background-color: transparent;
+  border: 0;
+}
+
+.homepage-events .card{
+  border: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .homepage-events .card{
+    min-width: 100%;
+    max-width: 100%;
+  }
+}

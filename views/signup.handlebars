@@ -1,0 +1,29 @@
+<main >
+    <h1 class="title">{{title}}</h1>
+    <form id="signup_form" action="/signup" method="POST">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" id="first_name" placeholder="First Name" required/>
+
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name"  placeholder="Last Name" required/>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email"  placeholder="Email" required/>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"  placeholder="Password" required/>
+
+        <label for="repeat_password">Reenter Password</label>
+        <input type="password" name="repeat_password" id="repeat_password"  placeholder="Confirm Password" required/>
+
+        <label for="role">Select your Role</label>
+        <select name="role" id="role">
+            <option value="host">Host</option>
+            <option value="volunteer">Volunteer</option>
+        </select>
+
+        <button type="submit" onclick="onSubmitClicked()">Sign Up</button>
+    </form>
+    <p id="error_message">{{error}}</p>
+    <script src="/public/js/signup.js"></script>
+</main>
