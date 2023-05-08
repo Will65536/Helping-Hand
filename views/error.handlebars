@@ -1,0 +1,28 @@
+<main>
+<div class="error">
+
+    <h1>Oops!</h1>
+    <h2 id="message"></h2>
+
+    <img src="/public/images/page_eat.webp">
+    <a href="/home">Click here to redirect to homepage</a>
+</div>
+<script>
+    let error = {{error}}
+    console.log(error);
+
+    if (error === 404){
+        document.getElementById("message").innerHTML = "404: Page not found";
+    } else if (error === 403){
+        document.getElementById("message").innerHTML = "403: Forbidden";
+    } else if (error === 500){
+        document.getElementById("message").innerHTML = "500: Internal Server Error";
+    } else if (error === 503){
+        document.getElementById("message").innerHTML = "503: Service Unavailable";
+    } else if (error === 504){
+        document.getElementById("message").innerHTML = "504: Gateway Timeout";
+    }else {
+        document.getElementById("message").innerHTML = "Something went wrong";
+    }
+</script>
+</main>

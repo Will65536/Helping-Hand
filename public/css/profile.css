@@ -1,0 +1,12 @@
+.skill_badge {
+  color: #000000;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+#skill_badges {
+  justify-content: initial;
+}

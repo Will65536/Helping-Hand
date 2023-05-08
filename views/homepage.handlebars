@@ -7,26 +7,34 @@
   </div>
 
   <section class="homepage-events">
-    <h3>Recent Events</h3>
+    <h1 id="popular">Popular Events</h1>
+
     <div class="row-container">
       <div class="row">
 
         {{#each allEvents}}
 
           <div class="card card-{{@index}}">
-            <img
-              src="/public/images/{{image_url}}"
-              class="card-img-top"
-              alt="..."
-            />
+            <a class="eventA" href="event/{{_id}}">
+              <img
+                src="/public/images/{{image_url}}"
+                class="image"
+                alt="{{alt}}"
+              />
+
+            
             <div class="card-body">
-              <h5 class="card-title"><a
-                  href="event/{{_id}}"
-                >{{event_name}}</a></h5>
-                <p class="card-text">{{description}}</p>
-                <p>{{likes}}&nbsp;<i class="fa fa-heart"></i></p>
-                <p><span>Registration Deadline:</span>&nbsp;{{application_deadline}}</p>
+
+              <h2 class="card-title">
+                {{event_name}}</h2>
+              <p class="city-name">{{location.city}}</p>
+              <p class="card-text">{{description}}</p>
+              </a>
+                {{> like_partial }}
+              <p><span>Registration Deadline:</span>&nbsp;{{application_deadline}}</p>
+
             </div>
+
           </div>
 
         {{else}}
@@ -35,10 +43,17 @@
 
       </div>
       <div id="sliderControls">
-        <button id="pre" class="control-btn" onclick="showPreEvent(event)"></button>
-        <button id="next" class="control-btn" onclick="showNextEvent(event)"></button>
+        <button
+          id="pre"
+          class="control-btn"
+          onclick="showPreEvent(event)"
+        ></button>
+        <button
+          id="next"
+          class="control-btn"
+          onclick="showNextEvent(event)"
+        ></button>
       </div>
-
     </div>
   </section>
 </main>

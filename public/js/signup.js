@@ -1,12 +1,12 @@
-function onSubmitClicked(){
-  let errorMessage = document.getElementById('error_message');
-  let signupform=document.getElementById('signup_form')
-  if(signupform)
+
+let errorMessage = document.getElementById('error_message');
+  let signup=document.getElementById('signup_form')
+  if(signup)
   {
-  registration.addEventListener('submit', async (event) => {
+    signup.addEventListener('submit',async (event)=>
+    {
   event.preventDefault();
-  
-  try{
+  try {
     let firstName = document.getElementById('first_name').value;
     firstName = checkString(firstName, 'first name');
     checkName(firstName);
@@ -14,6 +14,14 @@ function onSubmitClicked(){
     let lastName = document.getElementById('last_name').value;
     lastName = checkString(lastName, 'last name');
     checkName(lastName);
+
+    let birthDate = document.getElementById('birth_date').value;
+    //console.log(birthDate)
+    birthDate = Date.parse(birthDate);
+    if(!isValidTimeStamp(birthDate)) {
+      throw " Invalid birth_date timeStamp"
+    }
+    isUserAdult(birthDate);
 
     let email = document.getElementById('email').value;
     email = checkString(email, 'email');
@@ -28,13 +36,13 @@ function onSubmitClicked(){
     if(password !== repeatPassword) throw "Passwords do not match";
 
     errorMessage.hidden = true;
-    document.getElementById('signup_form').submit();
-  }catch(e){
+    signup.submit();
+  }catch(e) {
     errorMessage.hidden = false;
     errorMessage.innerHTML = e;
   }
-  })}
-}
+  }
+  )}
 
 function checkString(strVal, varName) {
   if (!strVal) throw `You must supply a ${varName}!`;
@@ -71,6 +79,22 @@ function checkPassword(password){
   if(!isNaN(password)) throw "Password cannot be a number";
   if(!password.match(/[A-Z]/)) throw "Password must contain at least one uppercase character";
   if(!password.match(/[0-9]/)) throw "Password must contain at least one number";
-  if(!password.match(/[!@#$%^&*]/)) throw "Password must contain at least one special character";
+  if(!password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=[\]{}|\\,.?'";:/<>\-])\S{8,}$/)) throw "Password must contain at least one special character";
 }
-signupform.submit()
+
+function isValidTimeStamp(timestamp) {
+  const date = new Date(timestamp);
+  return date instanceof Date && !isNaN(date);
+}
+
+function isUserAdult(birth_date) {
+  let dob = new Date(birth_date);
+  let now = new Date();
+  let age = now.getFullYear() - dob.getFullYear();
+  if (now < new Date(now.getFullYear(), dob.getMonth(), dob.getDate())) {
+    age--;
+  }
+  if(age < 18) {
+    throw "User should be atleast 18 years old"
+  }
+}

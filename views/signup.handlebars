@@ -7,6 +7,9 @@
         <label for="last_name">Last Name</label>
         <input type="text" name="last_name" id="last_name"  placeholder="Last Name" required/>
 
+        <label for="birth_date">Birth Date</label>
+        <input type="date" id="birth_date" name="birth_date" required>
+
         <label for="email">Email</label>
         <input type="email" name="email" id="email"  placeholder="Email" required/>
 
@@ -22,8 +25,13 @@
             <option value="volunteer">Volunteer</option>
         </select>
 
-        <button type="submit" onclick="onSubmitClicked()">Sign Up</button>
+        <button type="submit" value="submit">Sign Up</button>
     </form>
     <p id="error_message">{{error}}</p>
-    <script src="/public/js/signup.js"></script>
+    <script src="../public/js/signup.js"></script>
+
+    <script>
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("birth_date").setAttribute("max", today);
+    </script>
 </main>

@@ -1,3 +1,4 @@
+html,
 body {
   display: flex;
   flex-direction: column;
@@ -9,7 +10,8 @@ body {
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
-  padding: 10px 20px 10px 20px;
+  float: right;
+  padding: 10px 60px 10px 20px;
 }
 footer {
   background-color: #555;
@@ -28,33 +30,93 @@ footer {
 #myNavbar {
   float: right !important;
 }
-li.search input[type="text"] {
-  padding: 10px;
-  padding-right: 500px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
+
+@media (max-width: 768px) {
+  #myNavbar {
+    width: 100%;
+  }
+  #myNavbar li {
+    border-bottom: 1px solid white;
+  }
+}
+.navbar-brand {
+  position: relative;
 }
 
-li.search button {
+.navbar-brand:hover::before {
+  content: "\1F64C"; /* Unicode value for hands emoji */
+  position: absolute;
+  top: 0;
+  left: 120%;
+  transform: translateX(-50%);
+  font-size: 30px;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  font-size: 13px;
+}
+
+li.search input[type="text"] {
+  padding: 10px;
   float: left;
-  width: 10%;
-  padding: 14px;
+}
+
+@media (max-width: 768px) {
+  #myNavbar {
+    width: 100%;
+  }
+  #myNavbar li {
+    border-bottom: 1px solid white;
+  }
+}
+.navbar-brand {
+  position: relative;
+}
+
+.navbar-brand:hover::before {
+  content: "\1F64C"; /* Unicode value for hands emoji */
+  left: 120%;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 30px;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  font-size: 13px;
+}
+
+#searchValue {
+  width: 70%;
+  padding: 5px;
+  float: left;
+}
+#searchForm {
+  justify-content: center;
+  display: flex;
+  margin: 0;
+}
+.navbar-nav li {
+  min-width: fit-content;
+}
+
+#searchButton {
+  float: left;
+  padding: 10px;
   background: #2196f3;
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   border: 1px solid grey;
   border-left: none;
   cursor: pointer;
 }
 
-li.search button:hover {
+#searchButton:hover {
   background: #0b7dda;
 }
 
-li.search::after {
+#searchButton::after {
   content: "";
   clear: both;
   display: table;
@@ -68,4 +130,8 @@ li.search::after {
   #myNavbar li {
     border-bottom: 1px solid white;
   }
+}
+
+.empty {
+  font-size: xx-large;
 }

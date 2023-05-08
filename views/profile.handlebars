@@ -1,0 +1,174 @@
+{{#with user}}
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img
+            class="rounded-circle mt-5"
+            width="150"
+            alt="Profile avatar"
+            src="../public/images/avatar.png"
+          />
+          <span class="font-weight-bold">{{first_name}} {{last_name}}</span>
+          <span class="text-black-50">{{email}}</span>
+          <span>{{#if isHost}}HOST{{else}}VOLUNTEER{{/if}}</span>
+        </div>
+      </div>
+
+      <div class="col-md-5 border-right">
+        <form
+          id="profile_form"
+          action="/profile"
+          method="POST"
+          onsubmit="onProfileUpdate()"
+        >
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profile Settings</h4>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label class="labels" for="first_name">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="first_name"
+                  id="first_name"
+                  placeholder="First Name"
+                  value="{{ first_name }}"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="labels" for="last_name">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="last_name"
+                  id="last_name"
+                  placeholder="Last Name"
+                  value="{{ last_name }}"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels" for="email">Email ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Enter Email"
+                  value="{{ email }}"
+                >
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels" for="contact">Contact Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="contact"
+                  id="contact"
+                  placeholder="Enter Mobile Number"
+                  value="{{ contact }}"
+                >
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels" for="bio">Bio</label>
+                <textarea
+                  rows="5"
+                  class="form-control"
+                  name="bio"
+                  id="bio"
+                  placeholder="Tell the world something about yourself"
+                >{{ bio }}</textarea>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels" for="skills">Skills</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="skills" placeholder="Add your skills here">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btn_add_skill">Add</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row">
+                <div class="cols" id="skill_badges">
+                    {{#each skills}}
+                        <span class="bg-info m-1 p-2 rounded-3 skill_badge">
+                            {{this}} <button id="{{this}}" type="button" class="btn-close" aria-label="Remove"></button>
+                        </span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels" for="address">Address</label>
+                <textarea
+                  rows="3"
+                  class="form-control"
+                  name="address"
+                  id="address"
+                  placeholder="Your Address"
+                >{{address}}</textarea>
+              </div>
+            </div>
+
+            <div class="mt-5 text-center">
+              <button
+                class="btn btn-primary profile-button"
+                type="submit"
+                id="submit_btn"
+                value="submit"
+              >Save Profile</button>
+            </div>
+
+            <div id="result_div" class="m-2 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center">
+            {{#if isHost}}
+                <h4>Past Hosted Events</h4>
+            {{else}}
+               <h4>Past Attended Events</h4>
+            {{/if}}
+          </div>
+          <br/>
+
+            {{#each ../events}}
+                <div class="col-md-12">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="event/{{this._id}}">{{this.event_name}}</a></h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-end">{{this.location.city}}, {{this.location.state}}</h6>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            {{/each}}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../public/js/profile.js"></script>
+{{/with}}

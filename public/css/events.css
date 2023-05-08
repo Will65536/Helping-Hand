@@ -1,18 +1,17 @@
-.row {
+#events .event-row-container {
   margin: 10px 0px 10px 0px;
   display: flex;
 }
 
-.col {
-  max-width: 33.33% !important;
-  width: 33.33% !important;
+#events .event-row-container .card {
+  max-width: 33.33%;
+  min-width: 33.33%;
   padding: 20px 20px 20px 20px;
 }
 
 .card img {
   max-width: 100%;
-  max-height: 100%;
-  display: block;
+  max-height: 350px;
   min-height: 350px;
 }
 
@@ -23,17 +22,27 @@
   color: crimson;
 }
 .row-container {
-  margin: 20px 30px 20px 30px;
+  margin: 20px 20px 20px 30px;
 }
 
 .fa-heart {
-  color: red;
+  color: purple;
 }
 
+.fa-heart:hover {
+  color: red;
+}
 .empty {
   display: block;
 }
-
+.card-title {
+  font-size: 20px;
+  /* font-style: oblique; */
+  color: rgb(5, 68, 25);
+}
+.card-title:hover {
+  color: rgb(5, 121, 42);
+}
 @media screen and (max-width: 768px) {
   .col {
     min-width: 100% !important;
@@ -89,7 +98,7 @@
 }
 
 #searchAndFilter {
-  justify-content: center;
+  justify-content: left;
   display: flex;
 }
 
@@ -108,4 +117,26 @@
   .search {
     margin-left: -18px;
   }
+
+  #events .event-row-container .card {
+    min-width: 100% !important;
+  }
+}
+
+.event-row-container .row {
+  width: 100%;
+}
+
+#load-event-btn {
+  justify-content: center;
+  display: flex;
+}
+
+#load-event-btn button {
+  margin: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: fangsong;
+  color: black;
+  background-color: white;
 }

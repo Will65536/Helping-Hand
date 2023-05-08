@@ -1,0 +1,40 @@
+
+.error img
+{
+    width: 350px;
+    height: 300px;
+    border-radius: 50%;
+
+  
+}
+/* CSS code for the "Page Not Found" page */
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+  }
+  
+  .error h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  
+  .error a {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .error a:hover {
+    background-color: #666;
+  }
+  

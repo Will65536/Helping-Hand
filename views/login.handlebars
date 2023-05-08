@@ -1,11 +1,6 @@
 <main>
   <h1 class="title">{{title}}</h1>
-  <form
-    id="login_form"
-    action="/login"
-    method="POST"
-    onsubmit="onSubmitClicked()"
-  >
+  <form id="login_form" action="/login" method="POST">
     <label for="email">Email</label>
     <input
       type="email"
@@ -25,9 +20,9 @@
     />
     <button type="submit" value="Submit">Login</button>
 
+    <!--<a href="forgotpassword" class="register-link">Forgot password</a>
+-->
 
-    <a href="forgotpassword" class="register-link">Forgot password</a>
-    
     <a href="/signup" class="register-link">Don't have an account? Sign Up</a>
   </form>
   <p id="error_message">{{error}}</p>

@@ -1,0 +1,63 @@
+#yourEvents {
+  margin: 20px;
+}
+.participated-event {
+  width: 50%;
+  float: left;
+  min-height: 100vh;
+  border-right: 2px solid black;
+}
+
+.hosted-event {
+  width: 50%;
+  float: right;
+
+  padding-left: 20px;
+}
+
+.hist_image {
+  height: 150px;
+  width: 250px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+#yourEvents .city-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: rgb(64, 118, 13);
+}
+
+#link_to_events,
+#link_to {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.empty {
+  font-style: italic;
+  text-align: center;
+}
+
+#yourEvents .row {
+  width: 100%;
+}
+#yourEvents .card {
+  max-width: 90%;
+  min-width: 90%;
+  margin: 10px 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .participated-event {
+    width: 100% !important;
+    border-right: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .hosted-event {
+    width: 100% !important;
+  }
+}

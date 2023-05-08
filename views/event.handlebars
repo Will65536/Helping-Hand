@@ -1,10 +1,18 @@
 <main id="indi-event">
   <div class="event-img">
-    <img
-      src="/public/images/{{event.image_url}}"
-      class="card-img-top"
-      alt="..."
-    />
+    {{#if event.image_url}}
+      <img
+        src= {{event.image_url}}
+        class="card-img-top"
+        alt="{{event.alt}}"
+      />
+    {{else}}
+      <img
+        src="/public/images/No_Image_Available.jpg"
+        class="image"
+        alt="No Image Available for this event"
+      />
+    {{/if}}
   </div>
   <div class="event-container">
     <div class="host-time">
@@ -16,13 +24,44 @@
     <div class="about-event">
       <p><span><strong>About:</strong>&nbsp;</span>{{event.description}}</p>
     </div>
-    <div class="event-registeration">
-      <form action="">
-        <input type="submit" name="register-btn" value="REGISTER NOW" />
-      </form>
-    </div>
+    {{#if isHost}}
+      <div class="event-edit">
+
+        <a href="/event/edit/{{event._id}}">
+          <button type="button">EDIT EVENT</button>
+        </a>
+      </div>
+    {{else if event.isEventExpired}}
+      <div></div>
+    {{else if event.isRegistrationExpired}}
+      <div class="reg-closed-msg">
+        <p>Event Registration Closed</p>
+      </div>
+    {{else if user}}
+      <div class="event-registeration" id="event-r-btn">
+        {{#if isRegistered}}
+          <button
+            type="submit"
+            id="unregister-btn"
+            onclick="UnRegisterEvent('{{event_id}}')"
+          >
+            UNREGISTER
+          </button>
+        {{else}}
+          <button
+            type="submit"
+            id="register-btn"
+            onclick="registerEvent('{{event._id}}')"
+          >REGISTER NOW</button>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="login-btn">
+        <a href="/login">LOGIN FOR REGISTRATION</a>
+      </div>
+    {{/if}}
     <div class="event-location">
-      <p>When and Where</p>
+      <p class="event-sub-title">When and Where</p>
       <div class="time-loc-wrapper">
         <div class="event-time">
           <p>Date and Time</p>
@@ -48,10 +87,9 @@
           </p>
         </div>
       </div>
-
     </div>
     <div class="event-deadline">
-      <p>Registration Deadline</p>
+      <p class="event-sub-title">Registration Deadline</p>
       <div class="time-loc-wrapper">
         <div class="event-time">
           <p>Date and Time</p>
@@ -60,7 +98,7 @@
       </div>
     </div>
     <div class="event-host">
-      <p class="event-d-title">About the organizer</p>
+      <p class="event-sub-title">About the organizer</p>
       <div class="host-deatil">
         <p><span>Host:&nbsp;</span>
           {{event.host_info.host_name}}
@@ -73,6 +111,173 @@
         </p>
       </div>
     </div>
+
+    {{#if isHost}}
+      <div class="volunteer-list">
+        <p class="event-sub-title">Volunteer List&nbsp;({{volunteersCount}})</p>
+        {{#each volunteerList}}
+
+          <div class="card">
+            <div class="card-body">
+              <div class="volunteer">
+                {{#if (ifCond first_name "||" last_name)}}
+                  <h5
+                    class="card-title"
+                  >Name:&nbsp;{{first_name}}&nbsp;{{last_name}}</h5>
+                {{/if}}
+                <div class="volunteer-contact">
+                  {{#if contact}}
+                    <p class="card-text">Contact:&nbsp;{{contact}}</p>
+                  {{/if}}
+                  {{#if email}}
+                    <p class="card-text">Email:&nbsp;{{email}}</p>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+
+      <div id="story_feedback_view" class="d-flex flex-column">
+        <div class="row mt-2 my-5">
+          {{#if event.stories}}
+          <div class="col-md-6">
+            <p class="fs-4">Volunteers Experiences</p>
+              <div id="div_story_view">
+              {{#each event.stories}}
+                <div id="story_card_{{this.volunteer_id}}" class="card w-100 mb-2">
+                  <div class="card-body p-4">
+                    <div>
+                      <h5>{{this.volunteer_fname}} {{this.volunteer_lname}}</h5>
+                      <p id="story_{{this.volunteer_id}}">{{this.story_comment}}</p>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+              {{/each}}   
+              </div>
+          </div>
+          {{/if}}     
+
+          <div class="col-md-6">
+            {{#if (ifCond event.feedbacks '&&' isHost)}}
+            <p class="fs-4">Feedbacks</p>
+              <div id="div_feedback_view">
+              {{#each event.feedbacks}}
+                <div id="feedback_card_{{this.volunteer_id}}" class="card w-100 mb-2">
+                  <div class="card-body p-4">
+                    <div>
+                      <h5>{{this.firstname}} {{this.lastname}}</h5>
+                      <p class="text-muted">{{this.email}}</p>
+                      <p id="feedback_{{this.volunteer_id}}">{{this.feedback_comment}}</p>
+                    </div>
+                  </div>
+                </div>
+              {{/each}}   
+                <br/>
+              </div>
+            {{/if}} 
+          </div>  
+        </div>  
+
+      </div>
+
+    {{#unless isHost}}
+    <div id="story_feedback_section" class="d-flex flex-column">
+      <div class="row mt-2 my-5">
+      {{#if user}}
+        {{#if isRegistered}}
+          <div id="div_story" class="col-md-6">
+            <form id="story_form" action="/story" method="POST" onsubmit="onSubmitStory()" >
+              <label class="labels" for="story">Share your Experience</label>
+              <textarea
+                rows="5"
+                class="form-control"
+                name="story"
+                id="story"
+                placeholder="Describe your experience with the event"
+              ></textarea>
+
+              <div id="div_story_error" class="m-2 text-center"></div>
+
+              <div class="m-2 text-center">
+                <button
+                  class="btn btn-primary profile-button"
+                  type="submit"
+                  id="btn_submit_story"
+                  value="submit"
+                >Submit</button>
+              </div>
+            </form>
+          </div>
+        {{/if}}
+      {{/if}}
+
+          <div id="div_feedback" class="col-md-6">
+            <form id="feedback_form" action="/feedback" method="POST" onsubmit="onSubmitFeedback()" >
+              {{#unless user}}
+                <div class="row mt-2">
+                  <div class="col-md-4">
+                    <label class="labels" for="first_name">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="first_name"
+                      id="first_name"
+                      placeholder="First Name"
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <label class="labels" for="last_name">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="last_name"
+                      id="last_name"
+                      placeholder="Last Name"
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <label class="labels" for="email">Email ID</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Enter Email"
+                    >
+                  </div>
+                </div>
+              {{/unless}}
+              <label class="labels" for="feedback">Feedback (will only be seen by the host)</label>
+              <textarea
+                rows="5"
+                class="form-control"
+                name="feedback"
+                id="feedback"
+                placeholder="Share any feedback you have for the host"
+              ></textarea>
+              <div id="div_feedback_error" class="m-2 text-center"></div>
+
+              <div class="m-2 text-center">
+                <button
+                  class="btn btn-primary profile-button"
+                  type="submit"
+                  id="btn_submit_feedback"
+                  value="submit"
+                >Submit Feedback</button>
+              </div>
+            </form>
+          </div>
+
+      </div>
+    </div>
+    {{/unless}}
+
   </div>
+
+  <script src="/public/js/event.js"></script>
 
 </main>

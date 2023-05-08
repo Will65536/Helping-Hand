@@ -1,0 +1,314 @@
+{{#with event}}
+  <div class="d-flex row align-items-center rounded mx-5 my-2">
+
+    <span class="h1 text-center">{{event_name}}</span>
+
+    <div class="d-flex flex-column w-100 align-items-center p-2">
+    {{#if image_url}}
+      <div class="url-input-wrapper"></div>
+        <input type="text" id="image-url-input" placeholder="Enter the image URL">
+        <button id="display-image-btn" onclick="validateImageUrl()">Display Image</button>
+      </div>
+      <br>  
+
+      <div class="d-flex flex-column w-100 align-items-center p-2">
+        <img id="event-image" src= {{image_url}} alt="No Image Available for this event" />
+      </div>
+    {{else}}
+      <div class="url-input-wrapper"></div>
+        <input type="text" id="image-url-input" placeholder="Enter the image URL">
+        <button id="display-image-btn" onclick="validateImageUrl()">Display Image</button>
+      </div>
+      <br>  
+
+      <div class="d-flex flex-column w-100 align-items-center p-2">
+        <img id="event-image" src= "/public/images/No_Image_Available.jpg" alt="No Image Available for this event" />
+      </div>
+    {{/if}}
+    </div>
+
+    <div class="d-flex flex-column w-100 align-items-center p-2">
+      <form
+        id="event_form"
+        class="d-flex flex-column w-75"
+      >
+        <div class="p-3 py-5">
+          <span class="text-center"> <h2>Edit Details</h2> </span>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label class="labels" for="event_name">Event Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="event_name"
+                id="event_name"
+                placeholder="Event Name"
+                value="{{event_name}}"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels" for="description">Description</label>
+              <textarea
+                rows="5"
+                class="form-control"
+                name="description"
+                id="description"
+                placeholder="Describe the event you are hosting"
+              >{{description}}</textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label class="labels" for="app_deadline">Registration Deadline</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                name="app_deadline"
+                id="app_deadline"
+              />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label class="labels" for="host_time">Event Date & Time</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                name="host_time"
+                id="host_time"
+              />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label class="labels" for="street_address">Street Address</label>
+              <input
+                type="text"
+                class="form-control"
+                name="street_address"
+                id="street_address"
+                placeholder="Enter Street Address of Event Location"
+                value="{{location.address}}"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="labels" for="city">City</label>
+              <input
+                type="text"
+                class="form-control"
+                name="city"
+                id="city"
+                placeholder="Enter City of Event Location"
+                value="{{location.city}}"
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label class="labels" for="state">State</label>
+
+              <select class="form-select" name="state" id="state" aria-label="Default select example">
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District Of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="labels" for="zipcode">Zipcode</label>
+              <input
+                type="number"
+                class="form-control"
+                name="zipcode"
+                id="zipcode"
+                placeholder="Enter Zipcode of Event Location"
+                value="{{location.zipcode}}"
+              />
+            </div>
+
+          </div>
+
+          <div class="mt-5 text-center">
+            <button
+              class="btn btn-primary profile-button"
+              type="submit"
+              id="submit_btn"
+              value="submit"
+            >Save Changes</button>
+          </div>
+
+          <div id="result_div" class="m-2 text-center">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <script>
+      /*function validateImage() {
+        var fileInput = document.getElementById("image-input");
+
+        if (fileInput.files && fileInput.files[0]) {
+          var file = fileInput.files[0];
+          if (file.size <= 8 * 1024 * 1024) {
+            displayImage(file);
+          } else {
+            fileNameSpan.textContent = "";
+            alert("The selected image file exceeds the size limit of 8MB.");
+          }
+        }
+      }*/
+
+      function validateImageUrl() {
+        var urlInput = document.getElementById("image-url-input");
+
+        urlInput.value = urlInput.value.trim();
+        if(urlInput.value) {
+          displayImage(urlInput.value);
+        }else {
+          urlInput.value = '';
+          alert("The image url must be non-empty string");
+        }
+      }
+
+      function displayImage(image) {
+        var imgElement = document.getElementById("event-image");
+        // var fileNameSpan = document.getElementById("file-name");
+        var urlInput = document.getElementById("image-url-input");
+
+        if (typeof image === "string") {
+          // replaceFile();
+          // fileNameSpan.textContent = "";
+          imgElement.src = image;
+        }/*else if (image instanceof File) {
+          urlInput.value = "";
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            imgElement.src = e.target.result;
+          };
+          reader.readAsDataURL(image);
+        }*/
+      }
+
+      /* function chooseFile() {
+        var fileInput = document.getElementById("image-input");
+        fileInput.click();
+      }*/
+
+      /* function replaceFile() {
+        var fileInput = document.getElementById("image-input");
+        var newFileInput = document.createElement("input");
+
+        newFileInput.type = "file";
+        newFileInput.id = "image-input";
+        newFileInput.accept = "image/*";
+        newFileInput.style.display = "none";
+        newFileInput.onchange = validateImage;
+
+        // Replace the existing file input element
+        fileInput.parentNode.replaceChild(newFileInput, fileInput);
+      }*/ 
+
+      /*document.getElementById("image-input").addEventListener("change", function() {
+        var fileInput = document.getElementById("image-input");
+        var fileNameSpan = document.getElementById("file-name");
+        if (fileInput.files && fileInput.files[0]) {
+          fileNameSpan.textContent = fileInput.files[0].name;
+        } else {
+          fileNameSpan.textContent = "";
+        }
+      });*/
+    </script>
+
+    <script src="/public/js/edit_event.js" ></script>
+    <script>
+      window.release_time = "{{release_time}}";
+
+        const state = "{{location.state}}";
+        let select = document.getElementById("state");
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value == state) {
+            select.options[i].selected = true;
+            break;
+          }
+        }
+
+        let currentDate = new Date();
+
+        let releaseDate = new Date({{release_time}});
+        releaseDate.setMonth(releaseDate.getMonth() + 6);
+
+        let date = new Date({{application_deadline}});
+        let app_deadline = document.getElementById("app_deadline");
+        app_deadline.value = date.toISOString().slice(0,16);
+
+        app_deadline.min = currentDate.toISOString().slice(0,16);
+
+        app_deadline.max = releaseDate.toISOString().slice(0,16);
+
+
+        date = new Date({{host_time}});
+        let host_time = document.getElementById("host_time");
+        host_time.value = date.toISOString().slice(0,16);
+
+        host_time.min = currentDate.toISOString().slice(0,16);
+
+        host_time.max = releaseDate.toISOString().slice(0,16);
+        
+    </script>
+{{/with}}

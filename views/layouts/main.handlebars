@@ -1,18 +1,23 @@
-<html>
+<html lang="en">
 
   <head>
     <meta charset="utf-8" />
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="../public/css/main.css" />
-    <link rel="stylesheet" href="../public/css/login.css" />
-    <link rel="stylesheet" href="../public/css/signup.css" />
-    <link rel="stylesheet" href="../public/css/events.css" />
-    <link rel="stylesheet" href="../public/css/about.css" />
-    <link rel="stylesheet" href="../public/css/login.css" />
-    <link rel="stylesheet" href="../public/css/home.css" />
-        <link rel="stylesheet" href="../public/css/event.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/login.css" />
+    <link rel="stylesheet" href="/public/css/signup.css" />
+    <link rel="stylesheet" href="/public/css/events.css" />
+    <link rel="stylesheet" href="/public/css/about.css" />
+    <link rel="stylesheet" href="/public/css/login.css" />
+    <link rel="stylesheet" href="/public/css/home.css" />
+    <link rel="stylesheet" href="/public/css/event.css" />
+    <link rel="stylesheet" href="/public/css/error.css" />
+
+    <link rel="stylesheet" href="/public/css/profile.css" />
+    <link rel="stylesheet" href="/public/css/event.css" />
+    <link rel="stylesheet" href="/public/css/landing.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -41,6 +46,27 @@
           <a class="navbar-brand" href="/home">Helping Hands</a>
         </div>
 
+        <div class="container-fluid">
+          <form
+            method="post"
+            id="searchForm"
+            action="/search"
+            onsubmit="searchClicked()"
+          >
+            <label for="searchValue"></label>
+            <input
+              id="searchValue"
+              type="text"
+              name="searchValue"
+              placeholder="Search"
+            />
+            <label for="searchButton"></label>
+            <button id="searchButton" type="submit" onclick="searchClicked()"><i
+                class="fa fa-search"
+              ></i></button>
+          </form>
+        </div>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -55,18 +81,29 @@
         <div id="myNavbar">
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
+              {{#if isHost}}
+                <li class="nav-item"><a
+                    class="nav-link"
+                    href="/event/create"
+                  >Create Event</a></li>
+              {{/if}}
               <li class="nav-item"><a
                   class="nav-link"
-                  href="events"
+                  href="/home"
+                >Home</a></li>
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/events"
                 >Events</a></li>
 
               <li class="nav-item"><a
+                  href="/about"
+                  aria-label="About us"
                   class="nav-link"
-                  href="about"
                 >About</a></li>
 
-              {{#if isLoggedIn}}
+              {{#if user}}
+
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle"
@@ -76,28 +113,25 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Welcome, Jaydeep
+                    Welcome,
+                    {{first_name}}
                   </a>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                  >
+                  <ul class="dropdown-menu">
                     <li><a
                         class="dropdown-item"
-                        class="nav-link"
-                        href="#"
+                        href="/profile"
                       >Profile</a></li>
-                    <li><a
-                        class="dropdown-item"
-                        class="nav-link"
-                        href="#"
-                      >History</a></li>
-                    <li><a class="dropdown-item" class="nav-link" href="#">Log
-                        out</a></li>
+                    <li><a class="dropdown-item" href="/landing">Your events</a></li>
+                    <li><a class="dropdown-item" href="/logout">Log out</a></li>
+
                   </ul>
                 </li>
               {{else}}
-                <li class="nav-item"><a class="nav-link" href="login">Log In</a></li>
+                <li class="nav-item"><a
+                    class="nav-link"
+                    href="/login"
+                  >Login</a></li>
+
               {{/if}}
             </ul>
 
@@ -113,46 +147,15 @@
     <footer id="footer">
       <p></p>
     </footer>
-    <script>
-      document.getElementById("footer").getElementsByTagName("p")[0].innerHTML =
-      "&copy; " + new Date().getFullYear() + " Helping Hands, Inc";
-    </script>
-    <script>
-      var eventSliderIndex = 2; 
-      $(".homepage-events .card").css({"max-width":
-      "33%","display":"none"}); 
-      for(let card=0;card < 3;card++ ){
-      $(`.homepage-events .card-${card}`).css( "display","" ); }
+    <script src="/public/js/events.js"></script>
+    <script src="/public/js/accessiblityfunc.js"></script>
 
-   
-        $("#pre").html("<"); $("#next").html(">"); 
-        $("#pre").prop('disabled',true); 
-
-
-  
-        function showNextEvent(event){ 
-          $("#pre").prop('disabled', false); 
-          eventSliderIndex++;
-          if($(".homepage-events .card").length-1 === eventSliderIndex ){
-          $("#next").prop('disabled', true); } 
-          $(`.homepage-events .card-${eventSliderIndex}`).css( "display","" ); $(`.homepage-events .card-${eventSliderIndex-3}`).css( "display","none" ); 
-        };
-
-        
-        function showPreEvent(event){
-          $("#next").prop('disabled', false); if(eventSliderIndex === 3){
-          $("#pre").prop('disabled', true)}; $(`.homepage-events
-          .card-${eventSliderIndex}`).css( "display","none" ); $(`.homepage-events
-          .card-${eventSliderIndex-3}`).css( "display","" ); eventSliderIndex--;
-        };
-
-      $(document).ready(function() {
-        let els = document.getElementsByClassName("card");
-        Array.prototype.forEach.call(els, function(el) {
-          console.log(el.getElementsByClassName("card-text")[0].textContent);
-          el.getElementsByClassName("card-text")[0].innerHTML = el.getElementsByClassName("card-text")[0].textContent.trim().substring(0,100).trim().replace(/.$/,"")+"...";   
+    {{#if user}}
+      <script>
+        $(document).ready(function(){ localStorage.setItem('status','loggedIn');
         });
-      });
-    </script>
+      </script>
+    {{/if}}
+
   </body>
 </html>

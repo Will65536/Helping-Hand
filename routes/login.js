@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { isValidEmail, isValidString, validatePassword } from "../validation.js";
+import {
+  isValidEmail,
+  isValidString,
+  validatePassword,
+} from "../validation.js";
 import usersData from "../data/users.js";
 
 const router = Router();
@@ -14,28 +18,31 @@ router.route("/").post(async (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  try{
+  try {
     email = isValidString(email);
     email = email.toLowerCase();
     isValidEmail(email);
     password = isValidString(password);
     validatePassword(password);
-  }catch(e){
-    res.status(400).render('login', {title: 'Login', error: e});
+  } catch (e) {
+    res.status(400).render("login", { title: "Login", error: e });
   }
 
-  try{
+  try {
     // check the credentials against the database
     // if they are valid, redirect to the home page
-
-    const result = await usersData.verifyUser(email, password)
-    if(result){
-      console.log(email, password);
+    const result = await usersData.verifyUser(email, password);
+    if (result.isLoggedIn) {
       req.session.loggedIn = true;
-      res.render("homepage",{user:req.session.loggedIn});
+      req.session.first_name = result.userInfo;
+      req.session.isHost = result.ishost;
+      req.session.user_id = result.user_id;
+      //console.log(result.first_name)
+      return res.redirect("/home");
+      //res.render("homepage",{user:req.session.loggedIn,first_name:req.session.first_name});
     }
-  }catch(e){
-    res.status(400).render('login', {title: 'Login', error: e});
+  } catch (e) {
+    return res.status(400).render("login", { title: "Login", error: e });
   }
 });
 
